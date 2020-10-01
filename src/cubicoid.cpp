@@ -106,7 +106,6 @@ int main()
     float r = 20.0f;
     const float PI = 3.141592653589;
 
-    bool flip = true;
     for (int u = 0; u < precision; u++) {
         for (int v= 0; v < precision; v++) {
 
@@ -114,14 +113,12 @@ int main()
             float z = r/precision*v;
             float x1 = r/precision*(u+1.0f);
             float z1 = r/precision*(v+1.0f);
+            
             float y = y_xz(x, z);
             float y1 = y_xz(x, z1);
             float y3 = y_xz(x1, z1);
             float y2 = y_xz(x1, z);
-            // float y = cos(x)*sin(z);
-            // float y1 = cos(x)*sin(z1);
-            // float y3 = cos(x1)*sin(z1);
-            // float y2 = cos(x1)*sin(z);
+
             v_vertices.push_back(x);
             v_vertices.push_back(y);
             v_vertices.push_back(z);
@@ -146,7 +143,6 @@ int main()
             v_vertices.push_back(1.0f);
             v_vertices.push_back(1.0f);
             
-            flip = !flip;
         }
     }
     unsigned int VBO, VAO;
