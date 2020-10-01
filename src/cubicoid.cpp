@@ -10,6 +10,8 @@
 #include "shader.h"
 #include "camera.h"
 
+#include "vertex_gen.h"
+
 #include <iostream>
 // g++ camera_class.cpp glad.c -lglfw3 -lGLU -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lm; ./a.out
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -55,7 +57,7 @@ int main()
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "wow", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Surface", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -102,49 +104,8 @@ int main()
         0.0f, 1.0f+sqrt(2)/2, 0.0f-sqrt(2)/2, 1.0f, 1.0f,
 
     };
-    std::vector<float> v_vertices;
-    float r = 20.0f;
-    const float PI = 3.141592653589;
+    std::vector<float> other = cubicoid::gen_vertices();
 
-    for (int u = 0; u < precision; u++) {
-        for (int v= 0; v < precision; v++) {
-
-            float x = r/precision*u;
-            float z = r/precision*v;
-            float x1 = r/precision*(u+1.0f);
-            float z1 = r/precision*(v+1.0f);
-            
-            float y = y_xz(x, z);
-            float y1 = y_xz(x, z1);
-            float y3 = y_xz(x1, z1);
-            float y2 = y_xz(x1, z);
-
-            v_vertices.push_back(x);
-            v_vertices.push_back(y);
-            v_vertices.push_back(z);
-            v_vertices.push_back(0.0f);
-            v_vertices.push_back(0.0f);
-
-            v_vertices.push_back(x1);
-            v_vertices.push_back(y2);
-            v_vertices.push_back(z);
-            v_vertices.push_back(1.0f);
-            v_vertices.push_back(0.0f);
-                
-            v_vertices.push_back(x);
-            v_vertices.push_back(y1);
-            v_vertices.push_back(z1);
-            v_vertices.push_back(0.0f);
-            v_vertices.push_back(1.0f);
-
-            v_vertices.push_back(x1);
-            v_vertices.push_back(y3);
-            v_vertices.push_back(z1);
-            v_vertices.push_back(1.0f);
-            v_vertices.push_back(1.0f);
-            
-        }
-    }
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -154,7 +115,8 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     std::cout<< sizeof(vertices) << "\n";
     // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBufferData(GL_ARRAY_BUFFER, v_vertices.size()*sizeof(float), &v_vertices[0], GL_STATIC_DRAW);
+    // glBufferData(GL_ARRAY_BUFFER, v_vertices.size()*sizeof(float), &v_vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, other.size()*sizeof(float), &other[0], GL_STATIC_DRAW);
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
