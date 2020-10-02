@@ -3,7 +3,7 @@
   Cubicoid
 </h1>
 <h3 align="center">
-  The Surface Graphing Utility
+  The 3D-Surface Graphing Utility
 </h3>
 
 <p align="center">
