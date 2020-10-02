@@ -16,6 +16,7 @@ Three-dimensional graphing utility written in C++ and with OpenGL (glfw, glad, a
 2. GL 4.2
 3. GLAD (already included when compiling)
 4. STB_IMAGE (for loading images, also included)
+5. GLM (install this from their repository)
 
 ### Compiling instructions
 1. git clone https://github.com/classAndrew/cubicoid.git
