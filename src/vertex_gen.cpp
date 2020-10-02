@@ -1,20 +1,18 @@
 #include "vertex_gen.h"
 #include <math.h>
-#define IPRECISION 100
-#define JPRECISION 100
-// Typically for the third variable which is usually just a constant for f(x,y) plots
-#define KPRECISION 1
+#include <iostream>
 
 namespace cubicoid {
-    const float a = 0.2;
+    const float a = 5;
+    float m =2.5, n = 2.5;
     float x_paramaterized(float u, float v, float w) {
-        return (1+v/2*cos(u/2))*cos(u);
+        return a*sin(v)*(1+0.2*sin(m*u)*sin(n*v))*cos(u)+w;
     }
     float y_paramaterized(float u, float v, float w) {
-        return (1+v/2*cos(u/2))*sin(u);
+        return a*sin(v)*(1+0.2*sin(m*u)*sin(n*v))*sin(u)+w;
     }
     float z_paramaterized(float u, float v, float w) {
-        return v/2*sin(u/2)+w;
+        return a*cos(v)*(1+0.2*sin(m*u)*sin(n*v))+w;
     }
 
     float u_transform(int i) {
@@ -22,11 +20,11 @@ namespace cubicoid {
     }
 
     float v_transform(int j) {
-        return -1+2.0f/JPRECISION*j;
+        return M_PI/JPRECISION*j;
     }
 
     float w_transform(int k) {
-        return 5.0f;
+        return 2.0f;
     }
 
     std::vector<float> gen_vertices() {

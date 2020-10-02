@@ -8,10 +8,11 @@ out vec4 PColor;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec3 sizes;
 
 void main()
 {
 	gl_Position = projection * view * model * vec4(aPos, 1.0f);
 	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
-	PColor = vec4(aPos.x/10, aPos.z/10, aPos.y/10, 1.0f);
+	PColor = vec4(aPos.x/sizes.x, aPos.z/sizes.z, aPos.y/sizes.y, 1.0f);
 }

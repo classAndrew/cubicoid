@@ -34,7 +34,6 @@ bool firstMouse = true;
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
-const int precision = 100;
 float y_xz(float x, float z) {
     x-=10;
     z-=10;
@@ -88,22 +87,6 @@ int main()
     // ------------------------------------
     Shader ourShader("data/vert_shad.vs", "data/frag_shad.fs");
 
-    // set up vertex data (and buffer(s)) and configure vertex attributes
-    // ------------------------------------------------------------------
-    float vertices[(int)1e6] = {
-        0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-        1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-        
-
-        1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
-        1.0f, 1.0f+sqrt(2)/2, 0.0f-sqrt(2)/2, 0.0f, 1.0f,
-        
-        0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 1.0f+sqrt(2)/2, 0.0f-sqrt(2)/2, 1.0f, 1.0f,
-
-    };
     std::vector<float> other = cubicoid::gen_vertices();
 
     unsigned int VBO, VAO;
@@ -113,10 +96,10 @@ int main()
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    std::cout<< sizeof(vertices) << "\n";
+    std::cout<< other.size() << "\n";
     // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     // glBufferData(GL_ARRAY_BUFFER, v_vertices.size()*sizeof(float), &v_vertices[0], GL_STATIC_DRAW);
-    glBufferData(GL_ARRAY_BUFFER, other.size()*sizeof(float), &other[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, other.size()*sizeof(float), &other[0], GL_DYNAMIC_DRAW);
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
@@ -160,8 +143,8 @@ int main()
     ourShader.use();
     ourShader.setInt("texture1", 0);
 
-    std::cout << vertices[201] << "\n";
-    std::cout << vertices[200] << "\n";
+    glUniform3f(glGetUniformLocation(ourShader.ID, "sizes"), 5.0f, 5.0f, 5.0f);
+    
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -171,7 +154,7 @@ int main()
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
-
+        
         // input
         // -----
         processInput(window);
@@ -201,18 +184,24 @@ int main()
         glBindVertexArray(VAO);
         glm::mat4 model = glm::mat4(1.0f);
         ourShader.setMat4("model", model);
-
-        //glDrawArrays(GL_TRIANGLE_STRIP, 0, v_vertices.size());
-        for (int i = 0; i < precision*10; i++) {
-            glDrawArrays(GL_TRIANGLE_STRIP, i*precision, precision);
-        }
-        // glDrawArrays(GL_TRIANGLE_STRIP, 15000, 4);
-        // glDrawArrays(GL_TRIANGLE_STRIP, 15002, 4);
-        // glDrawArrays(GL_TRIANGLE_STRIP, 15004, 4);
-        // glDrawArrays(GL_TRIANGLE_STRIP, 0, (int)1e6);
         
+        for (int i = 0; i < IPRECISION*20; i++) {
+            glDrawArrays(GL_TRIANGLE_STRIP, i*JPRECISION, JPRECISION);
+        }
+        cubicoid::m =5*sin(glfwGetTime())+5;
+        cubicoid::n =5*sin(glfwGetTime())+5;
+        other = cubicoid::gen_vertices();
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
+        // glBindVertexArray(VAO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+        glBufferData(GL_ARRAY_BUFFER, other.size()*sizeof(float), &other[0], GL_DYNAMIC_DRAW);
+
+        // position attribute
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
