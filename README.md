@@ -8,8 +8,9 @@
 
 <p align="center">
   <img src="https://media.giphy.com/media/lw0vKUy5umSA1dlIgd/giphy.gif" />
+  <br />
+  <i> Parametric surface of a tumor cell I pulled out of my calc textbook </i>
 </p>
-Three-dimensional graphing utility written in C++ and with OpenGL (glfw, glad, and glm).
 
 ### Dependencies
 1. GLFW
@@ -29,4 +30,9 @@ To run, bin/runner
 ### Usage
 Currently, you have to write your own mini programs and compile with in order to graph anything. I'm currently working on implementing an evaluator or a nicer way to just link already compiled to objects together.
 If you're itching to get graphing, take a look at vert_gen.cpp which specifies x, y, z coords with a given transformation of u, v, w (w is not used).
+
+### Prospectives
+- Dynamic loading of compiled functions for drawing the surface
+- Maybe port to webGL some time
+- Useful GUI
 
