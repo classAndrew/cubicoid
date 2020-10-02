@@ -11,8 +11,15 @@
 </p>
 Three-dimensional graphing utility written in C++ and with OpenGL (glfw, glad, and glm).
 
-### Compiling
-1. mkdir bin
-2. make
+### Compiling instructions
+1. git clone https://github.com/classAndrew/cubicoid.git
+2. cd cubicoid
+3. mkdir bin
+4. make
 
 To run, bin/runner
+
+### Usage
+Currently, you have to write your own mini programs and compile with in order to graph anything. I'm currently working on implementing an evaluator or a nicer way to just link already compiled to objects together.
+If you're itching to get graphing, take a look at vert_gen.cpp which specifies x, y, z coords with a given transformation of u, v, w (w is not used).
+
