@@ -188,14 +188,13 @@ int main()
         for (int i = 0; i < IPRECISION*20; i++) {
             glDrawArrays(GL_TRIANGLE_STRIP, i*JPRECISION, JPRECISION);
         }
-        cubicoid::m =5*sin(glfwGetTime())+5;
-        cubicoid::n =5*sin(glfwGetTime())+5;
+        cubicoid::m =sin(2*glfwGetTime())+1;
+        cubicoid::n =cos(2*glfwGetTime())+1;
         other = cubicoid::gen_vertices();
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
-        // glBindVertexArray(VAO);
 
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        // glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
         glBufferData(GL_ARRAY_BUFFER, other.size()*sizeof(float), &other[0], GL_DYNAMIC_DRAW);
 
