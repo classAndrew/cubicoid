@@ -23,6 +23,7 @@
 3. GLAD (already included when compiling)
 4. STB_IMAGE (for loading images, also included)
 5. GLM (install this from their repository)
+6. Dear Imgui (already included when compiling)
 
 ### Prerequisites
 1. All of the above dependencies installed
