@@ -24,6 +24,12 @@
 4. STB_IMAGE (for loading images, also included)
 5. GLM (install this from their repository)
 
+### Prerequisites
+1. All of the above dependencies installed
+2. g++
+<br />
+The make file relies on the `find` command, so you may not be able to compile at all on a Windows machine, or just use WSL.
+
 ### Compiling instructions
 1. git clone https://github.com/classAndrew/cubicoid.git
 2. cd cubicoid
