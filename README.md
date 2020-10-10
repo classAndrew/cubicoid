@@ -6,6 +6,11 @@
   The 3D-Surface Graphing Utility
 </h3>
 
+<h4 align="center">
+  <i> 4D now that I think about it. There are 3 parameters: u,v,w. W isn't used, but you can change it if you'd like </i>
+</h3>
+  
+
 <p align="center">
   <img src="https://media.giphy.com/media/lw0vKUy5umSA1dlIgd/giphy.gif" />
   <br />
