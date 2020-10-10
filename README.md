@@ -46,4 +46,5 @@ If you're itching to get graphing, take a look at vert_gen.cpp which specifies x
 - Dynamic loading of compiled functions for drawing the surface
 - Maybe port to webGL some time
 - Useful GUI
+- Right now, I'm not utilizing compute shaders to their maximum potential. All vertices are calculated by the CPU and passed to the shaders only to draw stuff
 
