@@ -4,9 +4,19 @@ namespace cubicoid {
 
     float deltaTime = 0.0f;	// time between current frame and last frame
     float lastFrame = 0.0f;
+
     bool cursortoggle = false;
     float lastCursToggle = 0.0f;
+
+    // Camera movement vars
+    bool firstMouse = true;
+
+    float lastX = SCR_WIDTH / 2.0f;
+    float lastY = SCR_HEIGHT / 2.0f;
+
     Camera camera;
+
+
     void processInput(GLFWwindow *window)
     {
         float currentFrame = glfwGetTime();
@@ -32,5 +42,22 @@ namespace cubicoid {
             glfwSetInputMode(window, GLFW_CURSOR, cursortoggle ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
             cursortoggle = !cursortoggle;
         }
+    }
+    void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+    {
+        if (firstMouse)
+        {
+            lastX = xpos;
+            lastY = ypos;
+            firstMouse = false;
+        }
+
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+        lastX = xpos;
+        lastY = ypos;
+
+        camera.ProcessMouseMovement(xoffset, yoffset);
     }
 }

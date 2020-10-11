@@ -7,6 +7,9 @@
 namespace cubicoid
 {
     extern Camera camera;
+    extern bool lastMouse;
+    extern float lastX, lastY;
     void processInput(GLFWwindow *window);
+    void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 } // namespace cubicoid
 #endif
