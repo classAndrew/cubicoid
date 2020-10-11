@@ -1,3 +1,7 @@
+/*
+ I did not write this shader header. It is provided by learnopengl for an easy way to load shaders and handle compiling errors.
+*/
+
 #ifndef SHADER_H
 #define SHADER_H
 
