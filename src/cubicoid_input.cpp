@@ -1,8 +1,13 @@
 #include "cubicoid_input.h"
 
-namespace cubicoid {
+namespace cubicoid
+{
 
-    float deltaTime = 0.0f;	// time between current frame and last frame
+    // settings
+    unsigned int SCR_WIDTH = 800;
+    unsigned int SCR_HEIGHT = 600;
+
+    float deltaTime = 0.0f; // time between current frame and last frame
     float lastFrame = 0.0f;
 
     bool cursortoggle = false;
@@ -15,7 +20,6 @@ namespace cubicoid {
     float lastY = SCR_HEIGHT / 2.0f;
 
     Camera camera;
-
 
     void processInput(GLFWwindow *window)
     {
@@ -43,7 +47,7 @@ namespace cubicoid {
             cursortoggle = !cursortoggle;
         }
     }
-    void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+    void mouse_callback(GLFWwindow *window, double xpos, double ypos)
     {
         if (firstMouse)
         {
@@ -60,4 +64,13 @@ namespace cubicoid {
 
         camera.ProcessMouseMovement(xoffset, yoffset);
     }
-}
+    void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+    {
+        // make sure the viewport matches the new window dimensions; note that width and
+        // height will be significantly larger than specified on retina displays.
+        glViewport(0, 0, width, height);
+        SCR_HEIGHT = height;
+        SCR_WIDTH = width;
+    }
+
+} // namespace cubicoid
