@@ -43,6 +43,8 @@ To run, bin/runner
 Currently, you have to write your own mini programs and compile with in order to graph anything. I'm currently working on implementing an evaluator or a nicer way to just link already compiled to objects together.
 If you're itching to get graphing, take a look at vert_gen.cpp which specifies x, y, z coords with a given transformation of u, v, w (w is not used).
 
+Compile and run if you want to render a sample surface.
+
 ### Prospectives
 - Dynamic loading of compiled functions for drawing the surface
 - Maybe port to webGL some time
